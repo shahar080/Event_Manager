@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Event_Manager</string>
+    <string name="facebook_app_id">754971641377880</string>
+    <string name="fb_login_protocol_scheme">fb754971641377880</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+</resources>
