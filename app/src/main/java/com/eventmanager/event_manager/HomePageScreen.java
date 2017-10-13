@@ -6,8 +6,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,21 +21,17 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.facebook.LoginStatusCallback;
 import com.facebook.login.LoginManager;
-import com.facebook.login.widget.ProfilePictureView;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -93,34 +87,61 @@ public class HomePageScreen extends AppCompatActivity implements NavigationView.
          * Filling the myEvents arraylist
          */
         myEventsProperties.add(
-                new MyEvents("אירוע 1", "מידע על אירוע 1", 000000001)
+                new MyEvents("אירוע 1", "מידע על אירוע 1", "property_image_1", 1122, "050-1111111","בית1", new Date())
         );
         myEventsProperties.add(
-                new MyEvents("אירוע 2", "מידע על אירוע 2", 000000002)
+                new MyEvents("אירוע 2", "מידע על אירוע 2", "property_image_2", 1123, "050-2222222", "בית2", new Date())
         );
         myEventsProperties.add(
-                new MyEvents("אירוע 3", "מידע על אירוע 3", 000000003)
+                new MyEvents("אירוע 3", "מידע על אירוע 3", "property_image_3", 1124, "050-3333333", "בית3", new Date())
         );
         myEventsProperties.add(
-                new MyEvents("אירוע 4", "מידע על אירוע 4", 000000004)
+                new MyEvents("אירוע 4", "מידע על אירוע 4", "property_image_4", 1125, "050-4444444", "בית4", new Date())
         );
         myEventsProperties.add(
-                new MyEvents("אירוע 5", "מידע על אירוע 5", 000000005)
+                new MyEvents("אירוע 5", "מידע על אירוע 5", "property_image_1", 1126, "050-5555555", "בית5", new Date())
         );
         myEventsProperties.add(
-                new MyEvents("אירוע 6", "מידע על אירוע 6", 000000006)
+                new MyEvents("אירוע 6", "מידע על אירוע 6", "property_image_2", 1127, "050-6666666", "בית6", new Date())
         );
         myEventsProperties.add(
-                new MyEvents("אירוע 7", "מידע על אירוע 7", 000000007)
+                new MyEvents("אירוע 7", "מידע על אירוע 7", "property_image_3", 1128, "050-7777777", "בית7", new Date())
         );
         myEventsProperties.add(
-                new MyEvents("אירוע 8", "מידע על אירוע 8", 124312338)
+                new MyEvents("אירוע 8", "מידע על אירוע 8", "property_image_4", 1129, "050-8888888", "בית8", new Date())
         );
 
-        ArrayAdapter<MyEvents> adapter = new propertyArrayAdapter(this, 0, myEventsProperties);
+        ArrayAdapter<MyEvents> adapter = new myEventsArrayAdapter(this, 0, myEventsProperties);
 
         ListView listView = (ListView) findViewById(R.id.customListView);
         listView.setAdapter(adapter);
+
+        /**
+         * Settings click listeners
+         */
+        AdapterView.OnItemClickListener adapterViewListener = new AdapterView.OnItemClickListener() {
+
+            //on click
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                MyEvents property = myEventsProperties.get(position);
+
+                Intent intent = new Intent(HomePageScreen.this, MyEvents.class);
+//                intent.putExtra("streetNumber", property.getStreetNumber());
+//                intent.putExtra("streetName", property.getStreetName());
+//                intent.putExtra("suburb", property.getSuburb());
+//                intent.putExtra("state", property.getState());
+//                intent.putExtra("image", property.getImage());
+//                intent.putExtra("bedrooms", property.getBedrooms());
+//                intent.putExtra("bathrooms", property.getBathrooms());
+//                intent.putExtra("carspots", property.getCarspots());
+//                intent.putExtra("description", property.getDescription());
+
+//                startActivity(intent);
+            }
+        };
+//set the listener to the list view
+        listView.setOnItemClickListener(adapterViewListener);
 
 
     }
@@ -131,59 +152,61 @@ public class HomePageScreen extends AppCompatActivity implements NavigationView.
 
 
     //custom ArrayAdapter
-    class propertyArrayAdapter extends ArrayAdapter<MyEvents> {
+    class myEventsArrayAdapter extends ArrayAdapter<MyEvents> {
 
         private Context context;
-        private List<MyEvents> rentalProperties;
+        private List<MyEvents> myEventsProperties;
 
         //constructor, call on creation
-        public propertyArrayAdapter(Context context, int resource, ArrayList<MyEvents> objects) {
+        public myEventsArrayAdapter(Context context, int resource, ArrayList<MyEvents> objects) {
             super(context, resource, objects);
 
             this.context = context;
-            this.rentalProperties = objects;
+            this.myEventsProperties = objects;
         }
 
         //called when rendering the list
         public View getView(int position, View convertView, ViewGroup parent) {
 
             //get the property we are displaying
-            MyEvents property = rentalProperties.get(position);
+            MyEvents myEvents = myEventsProperties.get(position);
 
             //get the inflater and inflate the XML layout for each item
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             View view = inflater.inflate(R.layout.myevents_layout, null);
 
-            TextView description = (TextView) view.findViewById(R.id.description);
-            TextView address = (TextView) view.findViewById(R.id.address);
-            TextView bedroom = (TextView) view.findViewById(R.id.bedroom);
-            TextView bathroom = (TextView) view.findViewById(R.id.bathroom);
-            TextView carspot = (TextView) view.findViewById(R.id.carspot);
-            TextView price = (TextView) view.findViewById(R.id.price);
-            ImageView image = (ImageView) view.findViewById(R.id.image);
+            TextView eventName = (TextView) view.findViewById(R.id.eventName);
+            TextView eventCode = (TextView) view.findViewById(R.id.eventCode);
+            TextView eventInformation = (TextView) view.findViewById(R.id.description);
+            TextView eventDate = (TextView) view.findViewById(R.id.eventDate);
+            TextView eventLocation = (TextView) view.findViewById(R.id.eventLocation);
+            TextView ownerPhoneNumber = (TextView) view.findViewById(R.id.ownerPhoneNumber);
+            ImageView ownerImage = (ImageView) view.findViewById(R.id.image);
 
             //set address and description
-            String completeAddress = property.getEvent_name();
-            address.setText(completeAddress);
+            String completeAddress = myEvents.getEvent_name();
+            eventName.setText(completeAddress);
 
             //display trimmed excerpt for description
-            int descriptionLength = property.getEvent_information().length();
+            int descriptionLength = myEvents.getEvent_information().length();
             if(descriptionLength >= 100){
-                String descriptionTrim = property.getEvent_information().substring(0, 100) + "...";
-                description.setText(descriptionTrim);
+                String descriptionTrim = myEvents.getEvent_information().substring(0, 100) + "...";
+                eventInformation.setText(descriptionTrim);
             }else{
-                description.setText(property.getEvent_information());
+                eventInformation.setText(myEvents.getEvent_information());
             }
 
             //set price and rental attributes
-            price.setText("$" + String.valueOf(property.getEvent_code()));
-            bedroom.setText("Bed: ");
-            bathroom.setText("Bath: ");
-            carspot.setText("Car: ");
+            eventCode.setText("קוד האירוע: " + String.valueOf(myEvents.getEvent_code()));
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy");
+            String formattedDate = dateFormat.format(myEvents.getEvent_date());
+            eventDate.setText("תאריך: " + formattedDate);
+            eventLocation.setText("מיקום: " + myEvents.getEvent_locationName());
+            ownerPhoneNumber.setText("" + myEvents.getOwner_phoneNumber());
 
             //get the image associated with this property
-            //int imageID = context.getResources().getIdentifier(property.getImage(), "drawable", context.getPackageName());
-            //image.setImageResource(imageID);
+            int imageID = context.getResources().getIdentifier(myEvents.getEvent_image(), "drawable", context.getPackageName());
+            ownerImage.setImageResource(imageID);
 
             return view;
         }

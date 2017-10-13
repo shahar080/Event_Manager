@@ -4,78 +4,83 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="10dp"
-    android:paddingBottom="10dp">
+    android:paddingBottom="10dp"
+    android:background="@color/cardview_light_background">
 
     <ImageView
         android:id="@+id/image"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginRight="10dp"
-        android:contentDescription="Property Image" />
+        android:contentDescription="Event Owner Picture" />
 
     <LinearLayout
-        android:id="@+id/infoSection"
+        android:id="@+id/mainInfoSection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/image"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/address"
+            android:id="@+id/eventName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Street Address"
+            android:text="שם האירוע"
             android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/eventCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="קוד האירוע" />
 
         <TextView
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="Description"
+            android:text="מידע על האירוע"
             android:textSize="15sp" />
     </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/pricingSection"
+        android:id="@+id/subInfoSection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/infoSection"
+        android:layout_below="@+id/mainInfoSection"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="Price" />
-
-        <TextView
-            android:id="@+id/bedroom"
+            android:id="@+id/ownerPhoneNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/price"
-            android:layout_marginRight="15dp"
-            android:text="Bed:" />
+            android:text="מספר טלפון"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
-            android:id="@+id/bathroom"
+            android:id="@+id/eventLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/price"
-            android:layout_marginRight="15dp"
-            android:layout_toRightOf="@id/bedroom"
-            android:text="Bath:" />
+            android:text="מיקום"
+            android:layout_marginRight="22dp"
+            android:layout_marginEnd="22dp"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/eventDate"
+            android:layout_toStartOf="@+id/eventDate" />
 
         <TextView
-            android:id="@+id/carspot"
+            android:id="@+id/eventDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/price"
-            android:layout_marginRight="15dp"
-            android:layout_toRightOf="@id/bathroom"
-            android:text="Car:" />
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:inputType="phone"
+            android:text="תאריך" />
 
     </RelativeLayout>
 
