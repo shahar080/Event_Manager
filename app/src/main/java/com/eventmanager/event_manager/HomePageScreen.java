@@ -1,7 +1,9 @@
 package com.eventmanager.event_manager;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,9 +19,13 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.facebook.LoginStatusCallback;
@@ -31,6 +37,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by User on 11/10/2017.
@@ -40,7 +48,7 @@ public class HomePageScreen extends AppCompatActivity implements NavigationView.
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
-
+    private ArrayList<MyEvents> myEventsProperties = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +56,7 @@ public class HomePageScreen extends AppCompatActivity implements NavigationView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage_screen);
         setTitle("האירועים שלי"); //Change title
-        forceRTLIfSupported(); //Right to left
+        //forceRTLIfSupported(); //Right to left
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
@@ -81,10 +89,140 @@ public class HomePageScreen extends AppCompatActivity implements NavigationView.
         email.setText(LoginScreen.user_email);
 
 
+        /**
+         * Filling the myEvents arraylist
+         */
+        myEventsProperties.add(
+                new MyEvents("אירוע 1", "מידע על אירוע 1", 000000001)
+        );
+        myEventsProperties.add(
+                new MyEvents("אירוע 2", "מידע על אירוע 2", 000000002)
+        );
+        myEventsProperties.add(
+                new MyEvents("אירוע 3", "מידע על אירוע 3", 000000003)
+        );
+        myEventsProperties.add(
+                new MyEvents("אירוע 4", "מידע על אירוע 4", 000000004)
+        );
+        myEventsProperties.add(
+                new MyEvents("אירוע 5", "מידע על אירוע 5", 000000005)
+        );
+        myEventsProperties.add(
+                new MyEvents("אירוע 6", "מידע על אירוע 6", 000000006)
+        );
+        myEventsProperties.add(
+                new MyEvents("אירוע 7", "מידע על אירוע 7", 000000007)
+        );
+        myEventsProperties.add(
+                new MyEvents("אירוע 8", "מידע על אירוע 8", 124312338)
+        );
 
+        ArrayAdapter<MyEvents> adapter = new propertyArrayAdapter(this, 0, myEventsProperties);
+
+        ListView listView = (ListView) findViewById(R.id.customListView);
+        listView.setAdapter(adapter);
 
 
     }
+
+
+
+
+
+
+    //custom ArrayAdapter
+    class propertyArrayAdapter extends ArrayAdapter<MyEvents> {
+
+        private Context context;
+        private List<MyEvents> rentalProperties;
+
+        //constructor, call on creation
+        public propertyArrayAdapter(Context context, int resource, ArrayList<MyEvents> objects) {
+            super(context, resource, objects);
+
+            this.context = context;
+            this.rentalProperties = objects;
+        }
+
+        //called when rendering the list
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            //get the property we are displaying
+            MyEvents property = rentalProperties.get(position);
+
+            //get the inflater and inflate the XML layout for each item
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.myevents_layout, null);
+
+            TextView description = (TextView) view.findViewById(R.id.description);
+            TextView address = (TextView) view.findViewById(R.id.address);
+            TextView bedroom = (TextView) view.findViewById(R.id.bedroom);
+            TextView bathroom = (TextView) view.findViewById(R.id.bathroom);
+            TextView carspot = (TextView) view.findViewById(R.id.carspot);
+            TextView price = (TextView) view.findViewById(R.id.price);
+            ImageView image = (ImageView) view.findViewById(R.id.image);
+
+            //set address and description
+            String completeAddress = property.getEvent_name();
+            address.setText(completeAddress);
+
+            //display trimmed excerpt for description
+            int descriptionLength = property.getEvent_information().length();
+            if(descriptionLength >= 100){
+                String descriptionTrim = property.getEvent_information().substring(0, 100) + "...";
+                description.setText(descriptionTrim);
+            }else{
+                description.setText(property.getEvent_information());
+            }
+
+            //set price and rental attributes
+            price.setText("$" + String.valueOf(property.getEvent_code()));
+            bedroom.setText("Bed: ");
+            bathroom.setText("Bath: ");
+            carspot.setText("Car: ");
+
+            //get the image associated with this property
+            //int imageID = context.getResources().getIdentifier(property.getImage(), "drawable", context.getPackageName());
+            //image.setImageResource(imageID);
+
+            return view;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Author Name : https://stackoverflow.com/questions/6937782/android-how-to-put-a-dialog-box-after-pressing-a-back-button
