@@ -50,6 +50,7 @@ public class HomePageScreen extends AppCompatActivity implements NavigationView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage_screen);
         setTitle("האירועים שלי"); //Change title
+
         //forceRTLIfSupported(); //Right to left
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -82,6 +83,11 @@ public class HomePageScreen extends AppCompatActivity implements NavigationView.
         name.setText(LoginScreen.user_first_name + " " + LoginScreen.user_last_name);
         email.setText(LoginScreen.user_email);
 
+
+
+
+
+        //// TODO: 14/10/2017 take data from DB here
 
         /**
          * Filling the myEvents arraylist
@@ -116,32 +122,32 @@ public class HomePageScreen extends AppCompatActivity implements NavigationView.
         ListView listView = (ListView) findViewById(R.id.customListView);
         listView.setAdapter(adapter);
 
-        /**
-         * Settings click listeners
-         */
-        AdapterView.OnItemClickListener adapterViewListener = new AdapterView.OnItemClickListener() {
+        Log.d("before click listener  ", "before click listener ");
 
+
+        //add event listener so we can handle clicks
+        AdapterView.OnItemClickListener adapterViewListener = new AdapterView.OnItemClickListener() {
             //on click
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                MyEvents property = myEventsProperties.get(position);
+                MyEvents myEvents = myEventsProperties.get(position);
 
-                Intent intent = new Intent(HomePageScreen.this, MyEvents.class);
-//                intent.putExtra("streetNumber", property.getStreetNumber());
-//                intent.putExtra("streetName", property.getStreetName());
-//                intent.putExtra("suburb", property.getSuburb());
-//                intent.putExtra("state", property.getState());
-//                intent.putExtra("image", property.getImage());
-//                intent.putExtra("bedrooms", property.getBedrooms());
-//                intent.putExtra("bathrooms", property.getBathrooms());
-//                intent.putExtra("carspots", property.getCarspots());
-//                intent.putExtra("description", property.getDescription());
-
-//                startActivity(intent);
+                Intent intent = new Intent(HomePageScreen.this, CreateEventScreen.class);
+                Log.d("START ACTIVITY INTENT", "START ACTIVITY INTENT");
+                intent.putExtra("event_name", myEvents.getEvent_name());
+                intent.putExtra("event_code", myEvents.getEvent_code());
+                intent.putExtra("event_information", myEvents.getEvent_information());
+                intent.putExtra("event_date", myEvents.getEvent_date());
+                intent.putExtra("event_location", myEvents.getEvent_locationName());
+                intent.putExtra("event_ownerPhoneNumber", myEvents.getOwner_phoneNumber());
+                intent.putExtra("event_ownerImage",myEvents.getEvent_image());
+                startActivity(intent);
             }
         };
 //set the listener to the list view
+        Log.d("before setting listen  ", "before settings listener ");
         listView.setOnItemClickListener(adapterViewListener);
+        Log.d("after setting listen  ", "after settings listener ");
 
 
     }
@@ -211,31 +217,6 @@ public class HomePageScreen extends AppCompatActivity implements NavigationView.
             return view;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

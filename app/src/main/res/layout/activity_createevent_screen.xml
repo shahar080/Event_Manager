@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.eventmanager.event_manager.RegistrationScreen"
+    android:background="@color/colorPrimaryDark">
+
+
+    <ImageView
+        android:id="@+id/ownerImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginRight="10dp"
+        android:contentDescription="Event Owner Picture" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/eventName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="שם האירוע"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/eventCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="קוד האירוע"
+            android:layout_below="@id/eventName"/>
+
+        <TextView
+            android:id="@+id/eventInformation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="מידע על האירוע"
+            android:textSize="15sp"
+            android:layout_marginTop="46dp"
+            android:layout_below="@+id/eventCode"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/eventParticipants"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="משתתפים"
+            android:textSize="18sp"
+            android:layout_below="@id/eventInformation"/>
+
+        <TextView
+            android:id="@+id/eventDateAndTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="תאריך ושעה"
+            android:textSize="18sp"
+            android:layout_below="@id/eventParticipants"/>
+
+        <TextView
+            android:id="@+id/eventLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="מיקום"
+            android:textSize="18sp"
+            android:layout_below="@id/eventDateAndTime"/>
+
+        <TextView
+            android:id="@+id/ownerPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="מספר טלפון"
+            android:textSize="18sp"
+            android:layout_below="@id/eventLocation"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

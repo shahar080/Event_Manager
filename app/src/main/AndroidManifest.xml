@@ -27,6 +27,7 @@
         <activity android:name=".HomePageScreen"
             android:parentActivityName=".LoginScreen"/>
 
+
         <activity android:name=".SettingsScreen"
             android:parentActivityName=".HomePageScreen"/>
 
@@ -53,6 +54,11 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".CreateEventScreen"
+            android:parentActivityName=".HomePageScreen">
+
         </activity>
 
 

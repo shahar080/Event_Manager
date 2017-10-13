@@ -148,9 +148,7 @@ public class LoginScreen extends AppCompatActivity {
         if(isValidEmail(_mail.getText()) && !isEditTextEmpty(_mail) && !isEditTextEmpty(_password))
         {
             Log.d("login", "validating email");
-            //CHECK IN DATABASE HERE
-            //MOVE TO LOGIN SCREEN
-            //ELSE SHOW DIALOG NOT FOUND OR DOESN'T MATCH
+            //// TODO: 14/10/2017 take data from DB here
         }
         else
         {
