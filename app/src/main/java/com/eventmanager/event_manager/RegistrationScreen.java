@@ -43,7 +43,7 @@ public class RegistrationScreen extends AppCompatActivity {
         if(isValidEmail(_mail.getText()) && !isEditTextEmpty(_mail) && !isEditTextEmpty(_password))
         {
             Log.d("register", "registering to DB");
-            //// TODO: 14/10/2017 Send data to DB here
+            // TODO: Omer 14/10/2017 Send data to DB here
         }
         else
         {

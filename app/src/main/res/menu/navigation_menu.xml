@@ -3,9 +3,11 @@
 
 
     <!-- public events navigation drawer item -->
+    <!--
     <item android:id="@+id/nav_publicEvents"
         android:icon="@mipmap/ic_event_white_24dp"
         android:title="אירועים ציבוריים" />
+    -->
 
     <!-- settings navigation drawer item -->
     <item android:id="@+id/nav_settings"

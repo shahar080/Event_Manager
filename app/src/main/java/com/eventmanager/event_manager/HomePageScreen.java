@@ -50,6 +50,12 @@ public class HomePageScreen extends AppCompatActivity implements NavigationView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage_screen);
         setTitle("האירועים שלי"); //Change title
+        // TODO: Shahar 14/10/2017 find a solution for the drawer button to make it RTL
+        // TODO: Shahar 14/10/2017 find a solution for the picture in the drawer header
+        // TODO: Shahar 14/10/2017 add a + option to add a event to my events
+        // TODO: Shahar 14/10/2017
+        // TODO: Shahar 14/10/2017
+
 
         //forceRTLIfSupported(); //Right to left
 
@@ -87,7 +93,7 @@ public class HomePageScreen extends AppCompatActivity implements NavigationView.
 
 
 
-        //// TODO: 14/10/2017 take data from DB here
+        // TODO: Omer 14/10/2017 take data from DB here
 
         /**
          * Filling the myEvents arraylist
@@ -140,7 +146,7 @@ public class HomePageScreen extends AppCompatActivity implements NavigationView.
                 intent.putExtra("event_date", myEvents.getEvent_date());
                 intent.putExtra("event_location", myEvents.getEvent_locationName());
                 intent.putExtra("event_ownerPhoneNumber", myEvents.getOwner_phoneNumber());
-                intent.putExtra("event_ownerImage",myEvents.getEvent_image());
+                //intent.putExtra("event_ownerImage",myEvents.getEvent_image());
                 startActivity(intent);
             }
         };
@@ -317,13 +323,13 @@ public class HomePageScreen extends AppCompatActivity implements NavigationView.
         switch (item.getItemId()) {
 
 
-            case R.id.nav_publicEvents://CASE nav_publicEvents
+            /*case R.id.nav_publicEvents://CASE nav_publicEvents
             {
                 Log.d("onNavigationItemSelecte", "clicked on public events");
                 Intent intent = new Intent(this, PublicEventsScreen.class);
                 startActivity(intent);
                 break;
-            }
+            }*/
             case R.id.nav_settings://CASE nav_settings
             {
                 Log.d("onNavigationItemSelecte", "clicked on settings");

@@ -35,6 +35,7 @@ import static com.eventmanager.event_manager.R.id.userPassword;
 
 public class LoginScreen extends AppCompatActivity {
 
+    // TODO: Shahar 14/10/2017 add a login type variable for facebook, google or our DB
     private LoginButton loginButton;
     private CallbackManager callbackManager;
     public static Bitmap user_picture;
@@ -148,7 +149,8 @@ public class LoginScreen extends AppCompatActivity {
         if(isValidEmail(_mail.getText()) && !isEditTextEmpty(_mail) && !isEditTextEmpty(_password))
         {
             Log.d("login", "validating email");
-            //// TODO: 14/10/2017 take data from DB here
+            // TODO: Omer 14/10/2017 take data from DB here
+            // TODO: Shahar 14/10/2017 add google login option
         }
         else
         {

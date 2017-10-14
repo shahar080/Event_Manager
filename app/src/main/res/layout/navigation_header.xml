@@ -20,10 +20,10 @@
         android:padding="15dp"
         android:text="error getting user name"
         android:gravity="start"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="24dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignLeft="@+id/email"
+        android:layout_alignStart="@+id/email" />
 
     <!-- The email of the user -->
     <TextView
@@ -35,10 +35,13 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:padding="15dp"
+
         android:text="error getting user email"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/fullName"
-        android:layout_alignStart="@+id/fullName" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="14dp"
+        android:layout_marginEnd="14dp" />
 
     <!-- The picture of the user -->
 <!--
